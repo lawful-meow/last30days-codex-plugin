@@ -7,6 +7,14 @@ import sys
 from pathlib import Path
 
 
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS_ROOT = PLUGIN_ROOT / "scripts"
+if str(SCRIPTS_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_ROOT))
+
+from lib import env as last30days_env
+
+
 def load_payload():
     raw = sys.stdin.read().strip()
     if not raw:
@@ -44,7 +52,12 @@ def insecure_permissions(path: Path):
 
 
 def has_env_config():
-    return bool(os.environ.get("OPENAI_API_KEY") or os.environ.get("SCRAPECREATORS_API_KEY"))
+    return bool(os.environ.get("SCRAPECREATORS_API_KEY"))
+
+
+def has_codex_or_openai_auth():
+    auth = last30days_env.get_openai_auth({})
+    return auth.status == last30days_env.AUTH_STATUS_OK and bool(auth.token)
 
 
 def session_start_response(payload):
@@ -66,14 +79,15 @@ def session_start_response(payload):
                 }
             return {}
 
-    if has_env_config():
+    if has_env_config() or has_codex_or_openai_auth():
         return {}
 
     return {
         "systemMessage": (
             "/last30days: No API keys configured.\n\n"
             "Create .codex/last30days.env with your API keys, or use .claude/last30days.env for compatibility, "
-            "or create ~/.config/last30days/.env globally. At minimum, SCRAPECREATORS_API_KEY or OPENAI_API_KEY is required."
+            "or create ~/.config/last30days/.env globally, or run `codex login`. At minimum, "
+            "SCRAPECREATORS_API_KEY, OPENAI_API_KEY, or a valid Codex login is required."
         )
     }
 

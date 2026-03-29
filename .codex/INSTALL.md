@@ -36,11 +36,12 @@ chmod 600 .codex/last30days.env
 
 Compatible alternatives:
 
+- `codex login`
 - `.claude/last30days.env`
 - `~/.config/last30days/.env`
 - environment variables
 
-At minimum, `SCRAPECREATORS_API_KEY` or `OPENAI_API_KEY` is required.
+At minimum, `SCRAPECREATORS_API_KEY`, `OPENAI_API_KEY`, or a valid `codex login` session is required.
 
 ## Verify
 

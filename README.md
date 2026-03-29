@@ -30,10 +30,11 @@ Full setup details are documented in [`.codex/INSTALL.md`](./.codex/INSTALL.md).
 
 Supported config sources, in precedence order:
 
-1. Environment variables such as `OPENAI_API_KEY` or `SCRAPECREATORS_API_KEY`
-2. `.codex/last30days.env`
-3. `.claude/last30days.env`
-4. `~/.config/last30days/.env`
+1. A valid `codex login` session in `~/.codex/auth.json`
+2. Environment variables such as `OPENAI_API_KEY` or `SCRAPECREATORS_API_KEY`
+3. `.codex/last30days.env`
+4. `.claude/last30days.env`
+5. `~/.config/last30days/.env`
 
 The Codex hook checks those locations on session start and warns if no config is found or if a config file is too open.
 
