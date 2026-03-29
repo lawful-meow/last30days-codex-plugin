@@ -9,6 +9,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INSTALL_SCRIPT = REPO_ROOT / "scripts" / "install.py"
+INSTALL_SH = REPO_ROOT / "scripts" / "install.sh"
 HOOK_SCRIPT = REPO_ROOT / "plugins" / "last30days" / "hooks" / "codex-hook.py"
 SKILL_PATH = REPO_ROOT / "plugins" / "last30days" / "skills" / "last30days" / "SKILL.md"
 
@@ -175,6 +176,17 @@ printf '%s' "$SKILL_ROOT"
             )
 
             self.assertEqual(result.stdout, str(home_dir / "plugins" / "last30days"))
+
+    def test_remote_install_docs_and_script_use_one_command_bootstrap(self):
+        readme = (REPO_ROOT / "README.md").read_text()
+        install_doc = (REPO_ROOT / ".codex" / "INSTALL.md").read_text()
+        install_sh = INSTALL_SH.read_text()
+        bootstrap = "bash <(curl -fsSL https://raw.githubusercontent.com/lawful-meow/last30days-codex-plugin/refs/heads/main/scripts/install.sh)"
+        repo_url = 'REPO_URL="${LAST30DAYS_REPO_URL:-https://github.com/lawful-meow/last30days-codex-plugin.git}"'
+
+        self.assertIn(bootstrap, readme)
+        self.assertIn(bootstrap, install_doc)
+        self.assertIn(repo_url, install_sh)
 
 
 class CodexHookTests(unittest.TestCase):

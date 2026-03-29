@@ -10,13 +10,17 @@ This wrapper keeps the upstream research engine vendored under `plugins/last30da
 
 ## Install
 
-From a local checkout:
+One-command install:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/lawful-meow/last30days-codex-plugin/refs/heads/main/scripts/install.sh)
+```
+
+From a local checkout, the same installer is:
 
 ```bash
 bash scripts/install.sh
 ```
-
-If you want to bootstrap from a published remote instead, set `LAST30DAYS_REPO_URL` first and then run the same script.
 
 After the installer finishes, restart Codex. The installer copies the plugin bundle to `~/plugins/last30days`, merges a `last30days` entry into `~/.agents/plugins/marketplace.json`, enables `last30days@<marketplace-name>` in `~/.codex/config.toml`, enables `codex_hooks`, and registers the `SessionStart` config check in `~/.codex/hooks.json`.
 

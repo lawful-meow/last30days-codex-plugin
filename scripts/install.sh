@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-REPO_URL="${LAST30DAYS_REPO_URL:-}"
+REPO_URL="${LAST30DAYS_REPO_URL:-https://github.com/lawful-meow/last30days-codex-plugin.git}"
 INSTALL_DIR="${LAST30DAYS_INSTALL_DIR:-$HOME/.codex/last30days-codex-plugin}"
 
 SCRIPT_PATH="${BASH_SOURCE[0]:-}"

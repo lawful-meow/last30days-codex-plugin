@@ -1,12 +1,16 @@
 # Installing Last30days For Codex
 
+One-command install:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/lawful-meow/last30days-codex-plugin/refs/heads/main/scripts/install.sh)
+```
+
 From a local checkout:
 
 ```bash
 bash scripts/install.sh
 ```
-
-If you are running the installer outside a checkout, set `LAST30DAYS_REPO_URL` to your published repository URL first.
 
 The installer:
 
