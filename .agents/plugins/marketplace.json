@@ -1,0 +1,20 @@
+{
+  "name": "last30days-local",
+  "interface": {
+    "displayName": "Last 30 Days Local"
+  },
+  "plugins": [
+    {
+      "name": "last30days",
+      "source": {
+        "source": "local",
+        "path": "./plugins/last30days"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
